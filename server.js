@@ -24,7 +24,15 @@ const app = express();
 app.use(helmet());
 
 // Enable CORS for all origins (can restrict if needed)
-app.use(cors());
+// Enable CORS only for your frontend domain
+app.use(
+  cors({
+    origin: "https://pulse-archive-frontend.vercel.app", // your Vercel frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 
 // Parse JSON request bodies
 app.use(express.json());
